@@ -16,6 +16,7 @@ class ApiController extends Controller
         $param = $request->except(['_token', 'endpoint']);
         $endpoint = $request->get('endpoint');
         $password = $request->get('password');
+        $param = array_filter($param,'strlen');
 
         $response = Http::post($endpoint.'/api/addClient', $param);
 
@@ -36,6 +37,7 @@ class ApiController extends Controller
     function addSeller(Request $request){
         $param = $request->except('_token');
         $url = auth()->user()->url;
+        $param = array_filter($param,'strlen');
 
         $response = Http::withToken(auth()->user()->api_token)->post($url, $param);
 
@@ -57,6 +59,7 @@ class ApiController extends Controller
         $param['seller_phone'] = $seller->contact_number;
         $param['seller_currency'] = $seller->currency;
         $param['seller_first_name'] = $seller->first_name;
+        $param = array_filter($param,'strlen');
 
         $response = Http::withToken($token)->post($url.'/api/addSellerDeal', $param);
 
@@ -86,6 +89,7 @@ class ApiController extends Controller
         $param['upc_product_code'] = $product->upc_product_code;
         $param['seller_negotiation_mode'] = $product->seller_negotiation_mode;
         $param['seller_orignal_quantity'] = $product->seller_orignal_quantity;
+        $param = array_filter($param,'strlen');
         
         $response = Http::withToken($token)->post($url.'/api/seller-lease-parameters/store', $param);
 
@@ -102,6 +106,7 @@ class ApiController extends Controller
         $param = $request->except('_token', 'seller_id', 'product_id');
         $param['seller_email'] = $seller->email_id;
         $param['upc_product_code'] = $product->upc_product_code;
+        $param = array_filter($param,'strlen');
         
         $response = Http::withToken($token)->post($url.'/api/product/discount', $param);
 
@@ -118,6 +123,7 @@ class ApiController extends Controller
         $param = $request->except('_token', 'seller_id', 'product_id');
         $param['seller_email'] = $seller->email_id;
         $param['upc_product_code'] = $product->upc_product_code;
+        $param = array_filter($param,'strlen');
         
         $response = Http::withToken($token)->post($url.'/api/addDealNegotiationParameters', $param);
 
@@ -137,6 +143,7 @@ class ApiController extends Controller
         $param['upc_product_code'] = $product->upc_product_code;
         $param['seller_negotiation_mode'] = $product->seller_negotiation_mode;
         $param['seller_orignal_quantity'] = $product->seller_orignal_quantity;
+        $param = array_filter($param,'strlen');
         
         $response = Http::withToken($token)->post($url.'/api/seller-finance-parameters/store', $param);
 

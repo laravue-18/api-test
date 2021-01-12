@@ -267,7 +267,24 @@
             if(res.success){
                 alert("Success!!!")
             }else{
-                alert("Error!!!")
+                if(res.errors.first_name){
+                    alert(res.errors.first_name) 
+                }
+                if(res.errors.last_name){
+                    alert(res.errors.last_name) 
+                }
+                if(res.errors.organization){
+                    alert(res.errors.organization) 
+                }
+                if(res.errors.email_id){
+                    alert(res.errors.email_id) 
+                }
+                if(res.errors.contact_number){
+                    alert(res.errors.contact_number) 
+                }
+                if(res.errors.password){
+                    alert(res.errors.password) 
+                }
             }
         })
     })
